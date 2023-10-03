@@ -1,0 +1,29 @@
+body{
+  justify-content: center;
+
+}
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 200px));
+    grid-template-rows: repeat(auto-fill, minmax(200px, 200px));
+    grid-gap: 20px;
+  }
+  
+  .product-card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    text-align: center;
+    background-color: #f9f9f9;
+    width:100%;
+  }
+.add-product{
+    margin-bottom: 10px;
+    
+}
+.product-name{
+  margin-bottom: 12px;
+}
+.product-img{
+width:100%;
+filter: brightness(109%);
+}
