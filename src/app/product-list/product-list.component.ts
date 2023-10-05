@@ -1,52 +1,94 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DialogModule } from 'primeng/dialog';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent {
+  @ViewChild('dropZone', { static: false }) dropZoneElement: ElementRef | undefined;
+
+
+  categoryForm!: FormGroup;
   product: Product | null = null;
-  selectedFile: File | null = null;
+  categories!: Category[];
+  productModalOpen = false;
+  categoryModalOpen = false;
+  initialcategory: Category = { id: 1, name: 'General', description: 'created and traded to meet the diverse needs and wants of consumers', image: 'null' };
 
-  addProduct() {
-    if (this.selectedFile) {
-      const reader = new FileReader();
-      reader.onload = (event: any) => {
-        this.product = { ...this.newProduct, image: event.target.result };
-        this.products.push(this.product); // Add the new product to the products array
-      };
-      reader.readAsDataURL(this.selectedFile);
+  constructor(private formBuilder: FormBuilder) { }
 
-    } else {
-      this.product = { ...this.newProduct, image: 'https://placehold.co/600x400' }; // Default image URL
-      this.products.push(this.product); // Add the new product to the products array
+  ngOnInit(): void {
+    this.categoryForm = this.formBuilder.group({
+      id: [1, Validators.required],
+      name: ['', Validators.required],
+      description: ['', Validators.required]
+    });
 
-    }
+    this.categories = [this.initialcategory];
 
-    // Reset the selected file after adding the product
+ 
   }
-  newProduct: Product={id:34,name:'Product',price:23,description:'This is a Product Description',image:"null"}; // Object to store new product data
-   onFileSelected(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    if (inputElement.files && inputElement.files.length > 0) {
-      this.selectedFile = inputElement.files[0];
-    }
+
+ 
+  openProductModal() {
+    this.productModalOpen = true;
   }
-  products = [
-    { id: 1, name: 'Product 1', price: 10 , image: 'https://placehold.co/600x400'},
-    { id: 2, name: 'Product 2', price: 20 , image: 'https://placehold.co/600x400'},
-    { id: 3, name: 'Product 3', price: 30 , image: 'https://placehold.co/600x400'},
-    // Add more products as needed
-    
+
+  openCategoryModal() {
+    this.categoryModalOpen = true;
+  }
+
+  closeModal() {
+    this.productModalOpen = false;
+    this.categoryModalOpen = false;
+  }
+
+
+
+
+  products: Product[] = [
+    { id: 1, name: 'Product 1', price: 10, image: 'https://placehold.co/600x400', description: 'This is a Product Description', category: this.initialcategory }
   ];
 
-}
-
+  addCategory() {
+    if (!this.categoryForm.valid) {
+      return;
+    }
+  
+    // Find the maximum ID in the existing categories
+    const maxId = Math.max(...this.categories.map(category => category.id), 0);
+  
+    // Generate a new unique ID by incrementing the maximum ID
+    const newCategoryId = maxId + 1;
+  
+    const newCategory: Category = {
+      id: newCategoryId,
+      name: this.categoryForm.value.name,
+      description: this.categoryForm.value.description,
+      image: 'null'
+    };
+  
+    this.categories.push(newCategory);
+    this.categoryForm.reset();
+    this.closeModal();
+  }
+  
+  }
 export interface Product {
   id: number;
   name: string;
   price: number;
-  description:string,
-  image: string; 
-  // Add more properties as needed
+  description: string;
+  image: string;
+  category: Category;
 }
+
+export interface Category {
+  id: number;
+  name: string;
+  description: string;
+  image: string;
+}
+

@@ -23,7 +23,15 @@ body{
 .product-name{
   margin-bottom: 12px;
 }
-.product-img{
-width:100%;
-filter: brightness(109%);
-}
+
+.product-table-img{
+  
+  filter: brightness(109%);
+  }
+  .product-grid-img{
+    width:100%;
+    filter: brightness(109%);
+    }
+    .img-container{
+      width:100%;
+    }

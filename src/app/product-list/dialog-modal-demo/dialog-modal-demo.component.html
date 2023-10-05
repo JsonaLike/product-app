@@ -1,0 +1,74 @@
+
+<p-button (click)="showDialog()" icon="pi pi-external-link" label="Add Product"></p-button>
+<div class="card flex justify-content-center">
+    <p-dialog header="Add Product" [(visible)]="visible" [breakpoints]="{ '960px': '75vw' }" [style]="{ width: '50vw' }" [draggable]="true" [resizable]="true">
+        <div class="col-12">
+            <form [formGroup]="productForm" (ngSubmit)="addProduct()" class="add-product">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="productName">Product Name:</label>
+                    <input type="text" id="productName" formControlName="name" class="form-control">
+                    <div *ngIf="isProductFormSubmitted || productForm.get('name')?.invalid&& productForm.get('name')?.touched">
+                      Name is required.
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="productDescription">Product Description:</label>
+                    <textarea id="productDescription" formControlName="description" class="form-control" rows="4"></textarea>
+                    <div *ngIf="isProductFormSubmitted || productForm.get('description')?.invalid && productForm.get('description')?.touched">
+                      Description is required.
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="productPrice">Product Price:</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                      </div>
+                      <input type="number" id="productPrice" formControlName="price" class="form-control" step="0.01">
+                    </div>
+                    <div *ngIf="isProductFormSubmitted || productForm.get('price')?.invalid && productForm.get('price')?.touched">
+                      Price is required and must be greater than 0.01.
+                    </div>
+                  </div>
+                  <div class="custom-file mb-3">
+                    
+                    <label class="custom-file-label" for="productImage">Choose Product Image (JPG, PNG, JPEG)</label>
+                    <small class="form-text text-muted">Select an image for the product.</small>
+
+                    <div id="drop_zone" (drop)="myUploader($event)" (dragover)="dragOverHandler($event);" style="width:300px;height:200px;">
+                        <p>Drag one or more files to this <i>drop zone</i>.</p>
+                    <input type="file" class="custom-file-input" (change)="onFileSelected($event)" accept=".jpg, .png, .jpeg" required>
+
+                    </div>
+                </div>
+                  <div class="form-group">
+                    <label for="category">Category: </label>
+                    <p-dropdown [options]="categories" [(ngModel)]="selectedCategory" optionLabel="name"
+                                [filter]="true" filterBy="name" [showClear]="true" formControlName="selectedCategory"
+                                placeholder="Select a Category">
+                      <ng-template pTemplate="selectedItem">
+                        <div>{{ selectedCategory?.name }}</div>
+                      </ng-template>
+                      <ng-template let-category pTemplate="item">
+                        <div>{{ category.name }}</div>
+                      </ng-template>
+                    </p-dropdown>
+                    <div *ngIf="isProductFormSubmitted || productForm.get('selectedCategory')?.hasError('invalidCategory') && productForm.get('selectedCategory')?.touched">
+                      Please select a valid category.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <button type="submit" class="btn btn-primary">Add Product</button>
+                </div>
+              </div>
+            </form>
+          </div>
+    </p-dialog>
+</div>
