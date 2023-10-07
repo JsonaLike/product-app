@@ -6,3 +6,12 @@ body {
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.nav-link.dropdown-toggle{
+color:#fff;
+}
+.nav-link.dropdown-toggle:hover{
+    color:#c3c3c3;
+    }
+    .dropdown-item:active{
+        background-color:#c2c2c2;
+    }
