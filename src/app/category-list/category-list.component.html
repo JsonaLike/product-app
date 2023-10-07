@@ -1,24 +1,5 @@
-    <div class="col-6">
-      <h2>Add Category</h2>
-      <form [formGroup]="categoryForm" #formDirective="ngForm" (ngSubmit)="addCategory(formDirective)" class="col-4">
-      
-        <div class="form-group">
-          <label for="name">Name:</label>
-          <input type="text" id="name" formControlName="name" class="form-control">
-          <div *ngIf="categoryForm.get('name')?.invalid && categoryForm.get('name')?.touched">
-            Name is required.
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="description">Description:</label>
-          <textarea id="description" formControlName="description" class="form-control"></textarea>
-          <div *ngIf="categoryForm.get('description')?.invalid && categoryForm.get('description')?.touched">
-            Description is required.
-          </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Add Category</button>
-      </form>
-    </div>
+<button class="btn btn-primary" (click)="navigateToAddCategory()">Add Category</button>
+
   
 <p-table [value]="categories">
     <ng-template pTemplate="caption">
@@ -31,16 +12,13 @@
         <th>ID</th>
         <th>Name</th>
         <th>Description</th>
-        <th>Image</th>
-        <th>Image</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-category>
       <tr>
         <td>{{ category.id }}</td>
-        <td>{{ category.name }}</td>
+            <td><a [routerLink]="['/category-edit', category.id]">{{ category.name }}</a></td>
         <td>{{ category.description }}</td>
-        <td>Action</td>
         <td>
             <button type="button" class="btn btn-danger" (click)="removeCategory(category.id)">Remove</button>
           </td>

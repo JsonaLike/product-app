@@ -5,13 +5,17 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
 import { CategoryListComponent } from './category-list/category-list.component';
 import { CategoryEditComponent } from './category-edit/category-edit.component';
 import { AppComponent } from './app.component';
+import { CategoryAddComponent } from './category-add/category-add.component';
+import { ProductAddComponent } from './product-add/product-add.component';
 
 const routes: Routes = [
-  {path:'',component:AppComponent},
-  {path:'product-list',component:ProductListComponent},
-  {path:'product-edit',component:ProductEditComponent},
+  {path:'',component:ProductListComponent},
+  { path: 'product-list', component: ProductListComponent },
+  { path: 'product-add', component: ProductAddComponent },
+  {path:'product-edit/:id',component:ProductEditComponent},
   {path:'category-list',component:CategoryListComponent},
-  {path:'category-edit',component:CategoryEditComponent}
+  {path:'category-add',component:CategoryAddComponent},
+  {path:'category-edit/:id',component:CategoryEditComponent}
 ];
 
 @NgModule({

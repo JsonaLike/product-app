@@ -1,1 +1,34 @@
-<p>product-add works!</p>
+<form [formGroup]="productForm" (ngSubmit)="updateProduct()" class="col-4">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" id="name" formControlName="name" class="form-control" [class.is-invalid]="productForm.get('name')?.invalid && (productForm.get('name')?.touched || (isProductFormSubmitted && productForm.get('name')?.invalid ))">
+      <div *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched" class="invalid-feedback">
+        Name is required.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea id="description" formControlName="description" class="form-control" [class.is-invalid]="productForm.get('description')?.invalid && (productForm.get('description')?.touched || (isProductFormSubmitted && productForm.get('description')?.invalid ))"></textarea>
+      <div *ngIf="productForm.get('name')?.invalid && (productForm.get('name')?.touched || (isProductFormSubmitted && productForm.get('name')?.invalid ))" class="invalid-feedback">
+        Description is required.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="price">Price:</label>
+      <input type="number" id="price" formControlName="price" class="form-control"  [class.is-invalid]="productForm.get('price')?.invalid && (productForm.get('price')?.touched || (isProductFormSubmitted && productForm.get('price')?.invalid ))">
+      <div *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched" class="invalid-feedback">
+        Price is required.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="categoryId">Category:</label>
+      <select id="categoryId" formControlName="categoryId" class="form-control"  [class.is-invalid]="productForm.get('description')?.invalid && (productForm.get('description')?.touched || (isProductFormSubmitted && productForm.get('description')?.invalid ))">
+        <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+      </select>
+      <div *ngIf="productForm.get('categoryId')?.invalid && productForm.get('categoryId')?.touched" class="invalid-feedback">
+        Category is required.
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Update Product</button>
+  </form>
+  

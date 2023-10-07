@@ -1,22 +1,24 @@
 <div *ngIf="category">
-  <h2>Edit Category</h2>
-  <form [formGroup]="categoryForm" (ngSubmit)="updateCategory()" class="col-4">
+  <h2>Add Category</h2>
+  <form [formGroup]="categoryForm" (ngSubmit)="addCategory()" class="col-4">
     <div class="form-group">
       <label for="name">Name:</label>
       <input type="text" id="name" formControlName="name" class="form-control" [class.is-invalid]="categoryForm.get('name')?.invalid && (categoryForm.get('name')?.touched || (submitted && categoryForm.get('name')?.invalid ))">
-      <div *ngIf="categoryForm.get('name')?.invalid && (categoryForm.get('name')?.touched || (submitted && categoryForm.get('name')?.invalid))" class="invalid-feedback">Name is required.</div>
+      <div *ngIf="categoryForm.get('name')?.invalid && (categoryForm.get('name')?.touched || (submitted && categoryForm.get('name')?.invalid ))" class="invalid-feedback">Name is required.</div>
     </div>
     <div class="form-group">
       <label for="description">Description:</label>
       <textarea id="description" formControlName="description" class="form-control" [class.is-invalid]="categoryForm.get('description')?.invalid && (categoryForm.get('description')?.touched || (submitted && categoryForm.get('description')?.invalid ))"></textarea>
-      <div *ngIf="categoryForm.get('description')?.invalid && (categoryForm.get('description')?.touched || (submitted && categoryForm.get('description')?.invalid))" class="invalid-feedback">Description is required.</div>
+      <div *ngIf="categoryForm.get('description')?.invalid && (categoryForm.get('description')?.touched || (submitted && categoryForm.get('description')?.invalid ))" class="invalid-feedback">Description is required.</div>
     </div>
     <div class="form-group">
       <label for="image">Image URL:</label>
       <input type="text" id="image" formControlName="image" class="form-control" [class.is-invalid]="categoryForm.get('image')?.invalid && (categoryForm.get('image')?.touched || (submitted && categoryForm.get('image')?.invalid ))">
-      <div *ngIf="categoryForm.get('image')?.invalid && (categoryForm.get('image')?.touched || (submitted && categoryForm.get('image')?.invalid))" class="invalid-feedback">
+      <div *ngIf="categoryForm.get('image')?.invalid && (categoryForm.get('image')?.touched || (submitted && categoryForm.get('image')?.invalid ))" class="invalid-feedback">
+        <div>Image URL is required.</div>
+        <div>Invalid Image URL.</div>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary">Update Category</button>
+    <button type="submit" class="btn btn-primary">Add Category</button>
   </form>
 </div>

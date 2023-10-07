@@ -15,6 +15,8 @@ import { DialogModule } from 'primeng/dialog';
 import { CategoryListComponent } from './category-list/category-list.component';
 import { CategoryEditComponent } from './category-edit/category-edit.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
+import { ProductAddComponent } from './product-add/product-add.component';
+import { CategoryAddComponent } from './category-add/category-add.component';
 
 @NgModule({
     declarations: [
@@ -23,7 +25,9 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
         DialogModalDemo,
         CategoryListComponent,
         CategoryEditComponent,
-        ProductEditComponent
+        ProductEditComponent,
+        ProductAddComponent,
+        CategoryAddComponent
     ],
     providers: [],
     bootstrap: [AppComponent],

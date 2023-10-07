@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CategoryService } from '../category.service';
 import { Category } from '../app.component';
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-category-list',
@@ -14,10 +15,8 @@ export class CategoryListComponent {
   categoryModalOpen = false;
 
 
-constructor(private categoryService:CategoryService,private formBuilder:FormBuilder){}
+constructor(private categoryService:CategoryService,private formBuilder:FormBuilder,private router: Router){}
 ngOnInit(): void {
-  //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-  //Add 'implements OnInit' to the class.
   this.categories=this.categoryService.getAllCategories();
   this.categoryForm = this.formBuilder.group({
     id: [1, Validators.required],
@@ -32,10 +31,7 @@ addCategory( formDirective: FormGroupDirective) {
   }
   console.log('triggered2')
 
-  // Find the maximum ID in the existing categories
   const maxId = Math.max(...this.categories.map(category => category.id), 0);
-
-  // Generate a new unique ID by incrementing the maximum ID
   const newCategoryId = maxId + 1;
 
   const newCategory: Category = {
@@ -62,6 +58,11 @@ resetForm(){
 }
 closeModal() {
   this.categoryModalOpen = false;
+}
+navigateToAddCategory() {
+  console.log('tt');
+  
+  this.router.navigate(['/category-add']);
 }
 
 }

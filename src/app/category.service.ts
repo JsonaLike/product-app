@@ -38,4 +38,12 @@ export class CategoryService {
     this.categories.push(category);
     this.saveToLocalStorage(); // Save changes to localStorage after addition
   }
+  updateCategory(updatedCategory: Category): void {
+    const index = this.categories.findIndex(category => category.id === updatedCategory.id);
+    if (index !== -1) {
+      this.categories[index] = { ...updatedCategory };
+    }
+    this.saveToLocalStorage(); // Save changes to localStorage after addition
+
+  }
 }
