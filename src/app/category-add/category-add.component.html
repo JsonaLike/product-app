@@ -2,7 +2,7 @@
   <h2>Add Category</h2>
   <form [formGroup]="categoryForm" (ngSubmit)="addCategory()" class="col-4">
     <div class="form-group">
-      <label for="name">Name:</label>
+      <label for="name">Namea:</label>
       <input type="text" id="name" formControlName="name" class="form-control" [class.is-invalid]="categoryForm.get('name')?.invalid && (categoryForm.get('name')?.touched || (submitted && categoryForm.get('name')?.invalid ))">
       <div *ngIf="categoryForm.get('name')?.invalid && (categoryForm.get('name')?.touched || (submitted && categoryForm.get('name')?.invalid ))" class="invalid-feedback">Name is required.</div>
     </div>
