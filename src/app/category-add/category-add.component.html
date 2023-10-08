@@ -12,12 +12,10 @@
       <div *ngIf="categoryForm.get('description')?.invalid && (categoryForm.get('description')?.touched || (submitted && categoryForm.get('description')?.invalid ))" class="invalid-feedback">Description is required.</div>
     </div>
     <div class="form-group">
-      <label for="image">Image URL:</label>
-      <input type="text" id="image" formControlName="image" class="form-control" [class.is-invalid]="categoryForm.get('image')?.invalid && (categoryForm.get('image')?.touched || (submitted && categoryForm.get('image')?.invalid ))">
-      <div *ngIf="categoryForm.get('image')?.invalid && (categoryForm.get('image')?.touched || (submitted && categoryForm.get('image')?.invalid ))" class="invalid-feedback">
-        <div>Image URL is required.</div>
-        <div>Invalid Image URL.</div>
-      </div>
+      <div>
+        <label for="ImageId">Image:</label>
+    <div><input type="file" id="ImageId" class="custom-file-input"  (change)="onFileSelected($event)" accept=".jpg, .png, .jpeg" required></div>
+  </div>
     </div>
     <button type="submit" class="btn btn-primary">Add Category</button>
   </form>
